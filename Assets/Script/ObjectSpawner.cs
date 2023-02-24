@@ -33,6 +33,7 @@ public class ObjectSpawner : MonoBehaviour
             else
             {
                 obj.transform.position = placementndicator.transform.position;
+                
             }
             //GameObject obj = Instantiate(objectToSpawn, placementndicator.transform.position, placementndicator.transform.rotation);
             
