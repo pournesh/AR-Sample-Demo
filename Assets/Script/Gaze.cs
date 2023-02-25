@@ -6,8 +6,10 @@ using UnityEngine;
 public class Gaze : MonoBehaviour
 {
     List<InfoBehaviour> infos = new List<InfoBehaviour>();
+    Vector3 desiredScale = Vector3.zero;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         infos = FindObjectsOfType<InfoBehaviour>().ToList();
     }
@@ -36,11 +38,13 @@ public class Gaze : MonoBehaviour
         {
             if(info == desiredInfo)
             {
-                info.OpenInfo();
+                //info.OpenInfo();
+                OpenInfo();
             }
             else
             {
-                info.CloseInfo();
+                //info.CloseInfo();
+                CloseInfo();
             }
         }
     }
@@ -49,7 +53,18 @@ public class Gaze : MonoBehaviour
     {
         foreach (InfoBehaviour info in infos)
         {
-            info.CloseInfo();
+            //info.CloseInfo();
+            CloseInfo();
         }
+    }
+
+    public void OpenInfo()
+    {
+        desiredScale = Vector3.one;
+    }
+
+    public void CloseInfo()
+    {
+        desiredScale = Vector3.zero;
     }
 }

@@ -21,7 +21,7 @@ public class InfoBehaviour : MonoBehaviour
         sectionInfo.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime*speed);
 
     }
-    public void OpenInfo()
+  /*  public void OpenInfo()
     {
         desiredScale = Vector3.one;
     }
@@ -29,5 +29,5 @@ public class InfoBehaviour : MonoBehaviour
     public void CloseInfo()
     {
         desiredScale = Vector3.zero;
-    }
+    }*/
 }

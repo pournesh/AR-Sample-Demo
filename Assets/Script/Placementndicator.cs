@@ -8,6 +8,7 @@ public class Placementndicator : MonoBehaviour
 {
     private ARRaycastManager rayManager;
     public GameObject visual;
+    bool isvisualactive = false;
 
     private void Start()
     {
@@ -25,8 +26,12 @@ public class Placementndicator : MonoBehaviour
             transform.position = hits[0].pose.position;
             transform.rotation = hits[0].pose.rotation;
 
-            if (!visual.activeInHierarchy)
+            if (!visual.activeInHierarchy && isvisualactive == false)
+            {
                 visual.SetActive(true);
+                isvisualactive = true;
+            }
+                
         }
     }
 }
