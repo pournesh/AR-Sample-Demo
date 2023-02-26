@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class Gaze1 : MonoBehaviour
 {
-    List<InfoBehaviour> infos = new List<InfoBehaviour>();
+    //List<InfoBehaviour> infos = new List<InfoBehaviour>();
     Vector3 desiredScale = Vector3.zero;
     GameObject obtofind;
     Transform sectionInfo;
     float speed = 6;
+    bool isplaced = false;
+    private InfoBehaviour infos;
 
     // Start is called before the first frame update
     void Awake()
     {
-      //  infos = FindObjectsOfType<InfoBehaviour>().ToList();
+        //infos = get<InfoBehaviour>();
     }
 
     // Update is called once per frame
@@ -22,12 +24,19 @@ public class Gaze1 : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
         {
+
             GameObject go = hit.collider.gameObject;
-            if (go.CompareTag("hasInfo"))
+            if (go.tag == "hasInfo")
             {
+                infos = go.GetComponent<InfoBehaviour>();
+                infos.OpenInfo();
+
+
                 print("Here pointing");
+                isplaced = true;
+
                 //OpenInfo(go.GetComponent<InfoBehaviour>());
-                if(go.transform.childCount>=1 && go.transform.GetChild(0).name == "SectionInfo")
+              /*  if (go.transform.childCount >= 1 && go.transform.GetChild(0).name == "SectionInfo")
                 {
 
                     obtofind = go.transform.GetChild(0).gameObject;
@@ -35,46 +44,60 @@ public class Gaze1 : MonoBehaviour
                 }
                 sectionInfo = obtofind.transform;
                 Debug.Log(sectionInfo.position.x);
-                desiredScale = new Vector3(2,2,2);
-                sectionInfo.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime * speed);
-
+                //desiredScale = new Vector3(2,2,2);
+                //obtofind.transform.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime * speed);
+                //obtofind.transform.localScale = new Vector3(2, 2, 2);
+              */
             }
-        }
-        else
-        {
-            print("Here no");
-            desiredScale = Vector3.zero;
-            //sectionInfo.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime * speed);
-        }
-    }
-
-  /*  void OpenInfo(InfoBehaviour desiredInfo)
-    {
-        foreach (InfoBehaviour info in infos)
-        {
-            if (info == desiredInfo)
+            else if (isplaced == true)
             {
-                //info.OpenInfo();
-                OpenInfo();
-            }
-            else
-            {
-                //info.CloseInfo();
-                CloseInfo();
+                print("Not Pointing");
+                //desiredScale = new Vector3(0,0,0);
+                infos.CloseInfo();
+                //obtofind.transform.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime * speed);
+                //obtofind.transform.localScale = new Vector3(0, 0, 0);
             }
         }
-    }
-
-    void CloseAll()
-    {
-        foreach (InfoBehaviour info in infos)
+        else if (isplaced == true)
         {
-            //info.CloseInfo();
-            CloseInfo();
+            print("Not Pointing");
+            //desiredScale = new Vector3(0,0,0);
+            infos.CloseInfo();
+            //obtofind.transform.localScale = Vector3.Lerp(sectionInfo.localScale, desiredScale, Time.deltaTime * speed);
+            //obtofind.transform.localScale = new Vector3(0, 0, 0);
         }
-    }
 
-    public void OpenInfo()
+
+
+        }
+
+        /*  void OpenInfo(InfoBehaviour desiredInfo)
+          {
+              foreach (InfoBehaviour info in infos)
+              {
+                  if (info == desiredInfo)
+                  {
+                      //info.OpenInfo();
+                      OpenInfo();
+                  }
+                  else
+                  {
+                      //info.CloseInfo();
+                      CloseInfo();
+                  }
+              }
+          }
+
+          void CloseAll()
+          {
+              foreach (InfoBehaviour info in infos)
+              {
+                  //info.CloseInfo();
+                  CloseInfo();
+              }
+          }
+        */
+        public void OpenInfo()
     {
         desiredScale = Vector3.one;
     }
@@ -82,5 +105,5 @@ public class Gaze1 : MonoBehaviour
     public void CloseInfo()
     {
         desiredScale = Vector3.zero;
-    } */
+    } 
 }
